@@ -1,0 +1,177 @@
+﻿@model EmployeeLeaveManagement.ViewModels.AdminDashboardViewModel
+@{
+    ViewData["Title"] = "Reports";
+}
+
+<div class="container-fluid mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="bi bi-bar-chart-fill"></i> Reports & Statistics</h2>
+        <button onclick="window.print()" class="btn btn-primary">
+            <i class="bi bi-printer"></i> Print Report
+        </button>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Employee Summary</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-md-4">
+                            <div class="p-3">
+                                <i class="bi bi-people-fill display-4 text-primary"></i>
+                                <h3 class="mt-2">@Model.TotalEmployees</h3>
+                                <p class="text-muted">Total Employees</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3">
+                                <i class="bi bi-person-check-fill display-4 text-success"></i>
+                                <h3 class="mt-2">@Model.ActiveEmployees</h3>
+                                <p class="text-muted">Active Employees</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3">
+                                <i class="bi bi-person-x-fill display-4 text-secondary"></i>
+                                <h3 class="mt-2">@(Model.TotalEmployees - Model.ActiveEmployees)</h3>
+                                <p class="text-muted">Inactive Employees</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leave Statistics -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Leave Request Summary</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-md-3">
+                            <div class="p-3">
+                                <i class="bi bi-list-ul display-4 text-info"></i>
+                                <h3 class="mt-2">@Model.TotalLeaveRequests</h3>
+                                <p class="text-muted">Total Requests</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="p-3">
+                                <i class="bi bi-hourglass-split display-4 text-warning"></i>
+                                <h3 class="mt-2">@Model.PendingRequests</h3>
+                                <p class="text-muted">Pending</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="p-3">
+                                <i class="bi bi-check-circle-fill display-4 text-success"></i>
+                                <h3 class="mt-2">@Model.ApprovedRequests</h3>
+                                <p class="text-muted">Approved</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="p-3">
+                                <i class="bi bi-x-circle-fill display-4 text-danger"></i>
+                                <h3 class="mt-2">@Model.RejectedRequests</h3>
+                                <p class="text-muted">Rejected</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Percentage Analysis -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">Leave Request Analysis</h5>
+                </div>
+                <div class="card-body">
+                    @{
+                        var total = Model.TotalLeaveRequests > 0 ? Model.TotalLeaveRequests : 1;
+                        var approvedPercent = (Model.ApprovedRequests * 100.0 / total);
+                        var rejectedPercent = (Model.RejectedRequests * 100.0 / total);
+                        var pendingPercent = (Model.PendingRequests * 100.0 / total);
+                    }
+
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span>Approved Requests</span>
+                            <span>@approvedPercent.ToString("0.00")%</span>
+                        </div>
+                        <div class="progress" style="height: 25px;">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: @approvedPercent%">
+                                @Model.ApprovedRequests
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span>Pending Requests</span>
+                            <span>@pendingPercent.ToString("0.00")%</span>
+                        </div>
+                        <div class="progress" style="height: 25px;">
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: @pendingPercent%">
+                                @Model.PendingRequests
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span>Rejected Requests</span>
+                            <span>@rejectedPercent.ToString("0.00")%</span>
+                        </div>
+                        <div class="progress" style="height: 25px;">
+                            <div class="progress-bar bg-danger" role="progressbar" style="width: @rejectedPercent%">
+                                @Model.RejectedRequests
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0">Quick Actions</h5>
+                </div>
+                <div class="card-body text-center">
+                    <a asp-action="LeaveRequests" asp-route-status="Pending" class="btn btn-warning btn-lg me-2 mb-2">
+                        <i class="bi bi-hourglass-split"></i> View Pending Requests
+                    </a>
+                    <a asp-action="Employees" class="btn btn-primary btn-lg me-2 mb-2">
+                        <i class="bi bi-people-fill"></i> Manage Employees
+                    </a>
+                    <a asp-action="Dashboard" class="btn btn-info btn-lg mb-2">
+                        <i class="bi bi-speedometer2"></i> Back to Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    @@media print {
+        .btn, .card-footer {
+            display: none;
+        }
+    }
+</style>

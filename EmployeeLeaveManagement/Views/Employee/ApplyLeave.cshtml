@@ -1,0 +1,67 @@
+﻿@model EmployeeLeaveManagement.ViewModels.LeaveRequestViewModel
+@{
+    ViewData["Title"] = "Apply for Leave";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0"><i class="bi bi-calendar-plus"></i> Apply for Leave</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="ApplyLeave" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="FromDate" class="form-label"></label>
+                                <input asp-for="FromDate" class="form-control" type="date" />
+                                <span asp-validation-for="FromDate" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="ToDate" class="form-label"></label>
+                                <input asp-for="ToDate" class="form-control" type="date" />
+                                <span asp-validation-for="ToDate" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Reason" class="form-label"></label>
+                            <textarea asp-for="Reason" class="form-control" rows="5" placeholder="Please provide reason for leave..."></textarea>
+                            <span asp-validation-for="Reason" class="text-danger"></span>
+                        </div>
+
+                     
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="bi bi-send"></i> Submit Leave Request
+                            </button>
+                            <a asp-action="Dashboard" class="btn btn-secondary">
+                                <i class="bi bi-x-circle"></i> Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+       
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        // Set minimum date to today
+        document.addEventListener('DOMContentLoaded', function() {
+            var today = new Date().toISOString().split('T')[0];
+            document.querySelector('input[name="FromDate"]').setAttribute('min', today);
+            document.querySelector('input[name="ToDate"]').setAttribute('min', today);
+        });
+    </script>
+}

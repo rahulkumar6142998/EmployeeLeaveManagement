@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Access Denied";
+    Layout = "_Layout";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            <div class="card border-danger">
+                <div class="card-body">
+                    <div class="text-danger mb-3" style="font-size: 4rem;">⛔</div>
+                    <h2 class="text-danger mt-3">Access Denied</h2>
+                    <p class="lead">You don't have permission to access this page.</p>
+                    <hr />
+                    <p>Please contact your administrator if you believe this is an error.</p>
+                    <div class="mt-4">
+                        <a href="javascript:history.back()" class="btn btn-secondary me-2">Go Back</a>
+                        <a asp-action="Logout" class="btn btn-primary">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
