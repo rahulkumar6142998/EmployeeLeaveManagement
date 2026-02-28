@@ -1,126 +1,121 @@
-\# Employee Leave Management System
+# Employee Leave Management System
 
+A web-based Employee Leave Management System built using ASP.NET Core 8 MVC, Entity Framework Core, and SQL Server / LocalDB.
 
+---
 
+## 🚀 How to Setup and Run
 
+### 1️⃣ Install Requirements
 
-\## How to Setup and Run
+- Download and install .NET 8.0 SDK  
+  https://dotnet.microsoft.com/download/dotnet/8.0
 
+- Install SQL Server or SQL Server LocalDB
 
+---
 
-\### Step 1: Install Requirements
-
-
-
-1\. Download and install \[.NET 8.0 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
-
-2\. Make sure you have SQL Server or LocalDB installed
-
-
-
-\### Step 2: Clone the Project
-
-
+### 2️⃣ Clone the Repository
 
 ```bash
-
-git clone https://github.com/YOUR\_USERNAME/EmployeeLeaveManagement.git
-
+git clone https://github.com/YOUR_USERNAME/EmployeeLeaveManagement.git
 cd EmployeeLeaveManagement
+```
 
-Step 3: Update Database Connection
+---
 
-Open EmployeeLeaveManagement/appsettings.json and check the connection string:
+### 3️⃣ Update Database Connection
 
+Open:
 
+EmployeeLeaveManagement/appsettings.json
 
-JSON
+Check or update the connection string:
 
-
-
+```json
 "ConnectionStrings": {
-
-&nbsp; "DefaultConnection": "Server=(localdb)\\\\mssqllocaldb;Database=EmployeeLeaveManagementDB;Trusted\_Connection=True;MultipleActiveResultSets=true"
-
+  "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=EmployeeLeaveManagementDB;Trusted_Connection=True;MultipleActiveResultSets=true"
 }
+```
 
-Step 4: Install EF Tools (if needed)
+If using full SQL Server, change the `Server` value accordingly.
 
+---
+
+### 4️⃣ Install Entity Framework Tools (If Needed)
+
+```bash
 dotnet tool install --global dotnet-ef
+```
 
+---
 
+### 5️⃣ Restore Packages
 
-Step 5: Go to Project Folder
-
-cd EmployeeLeaveManagement
-
-
-
-Step 6: Restore Packages
-
+```bash
 dotnet restore
+```
 
+---
 
+### 6️⃣ Create and Update Database
 
-Step 7: Create Database
-
+```bash
 dotnet ef database update
+```
 
+This will create the database and apply migrations.
 
+---
 
-Step 8: Run the Application
+### 7️⃣ Run the Application
 
+```bash
 dotnet run
+```
 
+---
 
+### 8️⃣ Open in Browser
 
-Step 9: Open in Browser
+After running the project, open:
 
-Go to: https://localhost:5001 or http://localhost:5000
+https://localhost:5001  
+or  
+http://localhost:5000  
 
+---
 
+## 🔐 Login Credentials
 
-Login Credentials
+| Role     | Email                 | Password  |
+|----------|----------------------|-----------|
+| Admin    | admin@example.com    | admin123  |
+| Employee | employee@example.com | emp123    |
 
-Role	Email	Password
+---
 
-Admin	admin@example.com	admin123
+## ✨ Features
 
-Employee	employee@example.com	emp123
+### Admin
+- View dashboard
+- Manage employees
+- Approve or reject leave requests
+- View reports
 
-Features
+### Employee
+- Apply for leave
+- View leave history
+- Receive real-time notifications
 
-Admin can:
+---
 
+## 🛠 Technology Stack
 
+- ASP.NET Core 8.0 MVC
+- Entity Framework Core
+- SQL Server / LocalDB
+- Bootstrap 5
+- SignalR (Real-time notifications)
 
-View dashboard
-
-Manage employees
-
-Approve/reject leave requests
-
-View reports
-
-Employee can:
-
-
-
-Apply for leave
-
-View leave history
-
-Get real-time notifications
-
-Technology Stack
-
-ASP.NET Core 8.0 MVC
-
-Entity Framework Core
-
-SQL Server / LocalDB
-
-Bootstrap 5
-
-SignalR (for notifications)
-
+---
